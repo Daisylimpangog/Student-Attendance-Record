@@ -1,0 +1,18 @@
+Options +FollowSymLinks -MultiViews
+Order Allow,Deny
+Allow from all
+Require all granted
+
+<FilesMatch "\.(jpg|jpeg|png|gif)$">
+    Header set Content-Disposition "inline"
+</FilesMatch>
+
+<IfModule mod_mime.c>
+    AddType image/jpeg jpg jpeg
+    AddType image/png png
+    AddType image/gif gif
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+</IfModule>

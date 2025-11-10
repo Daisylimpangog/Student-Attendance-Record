@@ -1,0 +1,81 @@
+.user-avatar { 
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: #fff; 
+    font-weight: 700; 
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08); 
+    text-transform: uppercase;
+    position: relative;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+/* Graduated avatar style */
+.user-avatar.graduated {
+    border-color: #198754;
+}
+.user-avatar.graduated::after {
+    content: '🎓';
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background: #198754;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Frozen avatar style */
+.user-avatar.frozen {
+    border-color: #ffc107;
+    opacity: 0.8;
+    filter: grayscale(30%);
+}
+.user-avatar.frozen::after {
+    content: '❄️';
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    background: #ffc107;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Hover effects */
+.user-avatar.graduated:hover,
+.user-avatar.frozen:hover {
+    transform: scale(1.05);
+}
+
+/* Status tooltips on hover */
+.user-avatar.graduated[title]:hover::before,
+.user-avatar.frozen[title]:hover::before {
+    content: attr(title);
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 4px 8px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    font-size: 12px;
+    border-radius: 4px;
+    white-space: nowrap;
+    margin-bottom: 5px;
+    z-index: 1000;
+}
