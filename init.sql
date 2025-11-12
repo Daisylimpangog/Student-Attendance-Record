@@ -21,6 +21,19 @@ CREATE TABLE IF NOT EXISTS `attendance` (
 
 ALTER TABLE users ADD COLUMN kind ENUM('student','teacher') DEFAULT 'student';
 
+CREATE TABLE IF NOT EXISTS `password_reset_tokens` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `user_id` INT NOT NULL,
+  `email` VARCHAR(255) NOT NULL,
+  `token` VARCHAR(255) NOT NULL UNIQUE,
+  `expires_at` DATETIME NOT NULL,
+  `used` TINYINT(1) DEFAULT 0,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (`user_id`) REFERENCES `users`(`id`) ON DELETE CASCADE,
+  INDEX `token_idx` (`token`),
+  INDEX `email_idx` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 -- Seed an admin user with password: Admin@123
 -- Seed users: admin, a teacher, and a student (passwords shown for seed purposes only)
 INSERT INTO users (email,password,name,role,kind)

@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <input class="form-check-input" type="checkbox" value="1" id="rememberMe" name="remember">
                                         <label class="form-check-label" for="rememberMe">Remember me</label>
                                     </div>
-                                    <div><a href="#" class="small">Forgot password?</a></div>
+                                    <div><a href="forgot_password.php" class="small">Forgot password?</a></div>
                                 </div>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div>

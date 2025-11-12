@@ -434,8 +434,8 @@ if ($myKind === 'teacher') {
             <?php if ($userRole === 'admin'): ?>
                 <a class="btn btn-outline-light btn-sm" href="admin.php">Admin</a>
             <?php endif; ?>
-            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#howToUseModal">
-                <i class="bi bi-question-circle me-1"></i>How to Use
+            <button type="button" class="btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#howToUseModal" aria-label="How to Use">
+                <i class="bi bi-question-circle"></i>
             </button>
             <a class="btn btn-secondary btn-sm" href="logout.php">Logout</a>
         </div>
@@ -529,7 +529,9 @@ if ($myKind === 'teacher') {
                     </div>
                 </div>
                 <div class="modal-footer bg-light">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -619,8 +621,8 @@ if ($myKind === 'teacher') {
                 <div class="row g-3">
                     <div class="col-12 col-md-auto">
                         <div class="d-flex gap-2 flex-wrap">
-                            <button type="button" name="type" value="absent" class="btn btn-warning flex-grow-1 attendance-btn">
-                                <i class="bi bi-calendar-x me-1"></i>Mark Absent
+                            <button type="button" name="type" value="absent" class="btn btn-warning flex-grow-1 attendance-btn" aria-label="Mark Absent">
+                                <i class="bi bi-calendar-x"></i>
                             </button>
                         </div>
                         <input type="hidden" name="type" id="attendanceType">
@@ -655,8 +657,8 @@ if ($myKind === 'teacher') {
             <video id="faceVideo" width="320" height="240" autoplay muted style="border:1px solid #ddd;border-radius:6px"></video>
             <div id="faceStatus" class="mt-2 muted"></div>
             <div class="mt-2">
-                <button id="faceInBtn" class="btn btn-success btn-sm">Face Clock In</button>
-                <button id="faceOutBtn" class="btn btn-danger btn-sm">Face Clock Out</button>
+                <button id="faceInBtn" class="btn btn-success btn-sm" aria-label="Face Clock In"><i class="bi bi-person-check"></i></button>
+                <button id="faceOutBtn" class="btn btn-danger btn-sm" aria-label="Face Clock Out"><i class="bi bi-person-x"></i></button>
             </div>
         </div>
     </div>

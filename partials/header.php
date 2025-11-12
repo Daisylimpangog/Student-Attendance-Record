@@ -37,36 +37,34 @@ if (!empty($_SESSION['user_id'])) {
       $graduatedCount = (int)$c->fetchColumn();
     }
 
-    // Get unread announcements if the table exists
+  // Get unread announcements if the table exists
+  $unreadAnnouncements = [];
+  $totalUnread = 0;
+
+  try {
+    // Check if announcements table exists
+    $tableExists = $pdo->query("SHOW TABLES LIKE 'announcements'")->rowCount() > 0;
+    if ($tableExists) {
+      $stmt = $pdo->prepare("SELECT a.*
+        FROM announcements a
+        LEFT JOIN announcements_read ar ON ar.announcement_id = a.id AND ar.user_id = ?
+        WHERE a.is_active = 1
+        AND ar.read_at IS NULL
+        AND (
+          a.target_role = 'all'
+          OR (a.target_role = ? AND ? IN ('student', 'teacher'))
+        )
+        ORDER BY a.created_at DESC
+        LIMIT 5");
+      $stmt->execute([$_SESSION['user_id'], $myKind, $myKind]);
+      $unreadAnnouncements = $stmt->fetchAll();
+      $totalUnread = count($unreadAnnouncements);
+    }
+  } catch (PDOException $e) {
+    // Silently fail - worst case the announcements won't show
     $unreadAnnouncements = [];
     $totalUnread = 0;
-    
-    try {
-        // Check if announcements table exists
-        $tableExists = $pdo->query("SHOW TABLES LIKE 'announcements'")->rowCount() > 0;
-        if ($tableExists) {
-            if($pdo->query("SHOW TABLES LIKE 'announcements'")->rowCount() > 0) { $stmt = $pdo->prepare("
-              SELECT a.* 
-              FROM announcements a 
-              LEFT JOIN announcements_read ar ON ar.announcement_id = a.id AND ar.user_id = ?
-              WHERE a.is_active = 1 
-              AND ar.read_at IS NULL
-              AND (
-                  a.target_role = 'all' 
-                  OR (a.target_role = ? AND ? IN ('student', 'teacher'))
-              )
-              ORDER BY a.created_at DESC 
-              LIMIT 5
-            ");
-            $stmt->execute([$_SESSION['user_id'], $myKind, $myKind]); }
-            $unreadAnnouncements = $stmt->fetchAll();
-            $totalUnread = count($unreadAnnouncements);
-        }
-    } catch (PDOException $e) {
-        // Silently fail - worst case the announcements won't show
-        $unreadAnnouncements = [];
-        $totalUnread = 0;
-    }
+  }
   }
 }
 
@@ -144,11 +142,28 @@ if (!empty($_POST['mark_read']) && !empty($_SESSION['user_id'])) {
             <li class="nav-item me-2">
               <a class="nav-link" href="announcements.php">Manage Announcements</a>
             </li>
-          <?php endif; ?>
-          <?php if (!empty($_SESSION['user_role']) && $_SESSION['user_role'] === 'user'): ?>
             <li class="nav-item me-2">
-              <a class="nav-link" href="attendance.php">My Dashboard</a>
+              <a class="nav-link" href="admin_grades.php">Manage Grades</a>
             </li>
+            <li class="nav-item me-2">
+              <a class="nav-link" href="manage_subjects.php">Manage Subjects</a>
+            </li>
+          <?php endif; ?>
+          <?php if (!empty($myKind) && $myKind === 'teacher'): ?>
+            <li class="nav-item me-2">
+              <a class="nav-link" href="attendance.php">Dashboard</a>
+            </li>
+            <li class="nav-item me-2">
+              <a class="nav-link" href="teacher_grades.php">Manage Grades</a>
+            </li>
+          <?php elseif (!empty($myKind) && $myKind === 'student'): ?>
+            <!-- Teachers show Manage Grades instead, so this is only for students -->
+            <?php $isStudent = isset($myKind) && $myKind === 'student' ? true : false; ?>
+            <?php if ($isStudent): ?>
+            <li class="nav-item me-2">
+              <a class="nav-link" href="student_grades.php">My Grades</a>
+            </li>
+            <?php endif; ?>
           <?php endif; ?>
 
           <!-- Notifications Dropdown -->

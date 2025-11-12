@@ -598,6 +598,11 @@ $records = $att->fetchAll();
                                     <a class="btn btn-outline-primary" href="change_password.php?user_id=<?php echo $u['id']; ?>" title="Change password">
                                         <i class="bi bi-key"></i>
                                     </a>
+                                    <?php if (($u['kind'] ?? '') === 'student'): ?>
+                                    <a class="btn btn-outline-info" href="student_grades.php?student_id=<?php echo $u['id']; ?>" title="View grades">
+                                        <i class="bi bi-file-earmark-text"></i>
+                                    </a>
+                                    <?php endif; ?>
                                 </div>
                                 <form method="post" action="delete_user.php" class="d-inline" onsubmit="return confirm('Delete this user? This cannot be undone.');">
                                     <input type="hidden" name="user_id" value="<?php echo $u['id']; ?>">

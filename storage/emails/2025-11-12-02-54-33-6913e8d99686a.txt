@@ -1,0 +1,92 @@
+TO: daisylimpangog@gmail.com
+SUBJECT: Reset Your Password - CHPCEBU Attendance System
+TIME: 2025-11-12 02:54:33
+---
+BODY:
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #007bff;
+            margin: 0;
+        }
+        .content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .footer {
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Password Reset Request</h1>
+        </div>
+        
+        <div class="content">
+            <p>Hello <strong>Daisy Limpangog</strong>,</p>
+            
+            <p>We received a request to reset the password associated with your account. If you made this request, please click the button below to reset your password.</p>
+            
+            <center>
+                <a href="http://localhost/CHPCEBU-Attendance/reset_password.php?token=f7fc2f16d0b0f30e74104c72b752d904501aa7d61e695f1fbc9d8dd2c1ad0eaf" class="button">Reset Password</a>
+            </center>
+            
+            <p><strong>Or copy and paste this link in your browser:</strong></p>
+            <p><a href="http://localhost/CHPCEBU-Attendance/reset_password.php?token=f7fc2f16d0b0f30e74104c72b752d904501aa7d61e695f1fbc9d8dd2c1ad0eaf">http://localhost/CHPCEBU-Attendance/reset_password.php?token=f7fc2f16d0b0f30e74104c72b752d904501aa7d61e695f1fbc9d8dd2c1ad0eaf</a></p>
+            
+            <div class="warning">
+                <strong>⚠️ Security Notice:</strong> This link will expire in 24 hours. If you did not request a password reset, please ignore this email or contact support immediately.
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; Center for Healthcare Profession Cebu, Inc. All rights reserved.</p>
+            <p>This is an automated email. Please do not reply directly to this message.</p>
+        </div>
+    </div>
+</body>
+</html>

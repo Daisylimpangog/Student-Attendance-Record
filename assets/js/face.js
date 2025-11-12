@@ -35,6 +35,17 @@ const FACE = (function(){
         return Array.from(detection.descriptor);
     }
 
+    // Helper to compute Euclidean distance between two descriptors
+    function compareDescriptors(a, b) {
+        if (!a || !b || a.length !== b.length) return Number.POSITIVE_INFINITY;
+        let sum = 0;
+        for (let i = 0; i < a.length; i++) {
+            const d = a[i] - b[i];
+            sum += d * d;
+        }
+        return Math.sqrt(sum);
+    }
+
     async function postDescriptor(userId, descriptor) {
         const res = await fetch('/CHPCEBU-Attendance/save_face_descriptor.php', {
             method: 'POST',
@@ -116,5 +127,6 @@ const FACE = (function(){
         }
     }
 
-    return { initEnrollment, verifyCurrentUser };
+    // Exported API: enrollment + helpers for external verification by email
+    return { initEnrollment, verifyCurrentUser, loadModels, startVideo, captureDescriptorFromVideo, compareDescriptors };
 })();
